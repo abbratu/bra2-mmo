@@ -1,0 +1,23 @@
+{
+  "name": "mmo-server-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "ws": "^8.18.0",
+    "mmo-common-lib": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.8.5",
+    "@types/ws": "^8.5.12",
+    "concurrently": "8.2.2",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
