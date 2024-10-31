@@ -1,0 +1,9 @@
+{
+  "name": "bra2-mmo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:abbratu/bra2-mmo.git",
+  "author": "abbratu <abbratu@hotmail.com>",
+  "license": "MIT",
+  "devDependencies": {}
+}
