@@ -1,9 +1,9 @@
+export type D3Data = { x: number; y: number; z: number; }
+
 export type Player = {
     id: number;
     name: string;
 }
-
-export type D3Data = { x: number; y: number; z: number; }
 
 export type EntityState = {
     location: D3Data;
@@ -18,4 +18,4 @@ export type KeyboardState = {
 }
 
 export type PlayerState = EntityState & KeyboardState;
-
+export type PlayerData = PlayerState & Player;
