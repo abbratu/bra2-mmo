@@ -4,6 +4,7 @@ import { GameScreen } from "./GameScreen";
 export class PlayGameScreen extends GameScreen {
     private cube: Mesh;
 
+    
     constructor(
         renderer: WebGLRenderer,
         aspect: number

@@ -1,6 +1,6 @@
 import { Directive, ElementRef, OnInit, OnDestroy, NgZone, HostBinding, HostListener } from "@angular/core";
 import { WebGLRenderer } from "three/src/Three.js";
-import { Player, KeyboardState } from 'mmo-common-lib';
+import { Player, KeyboardState, WsServerMessage, WsServerMessageType, WsWelcomeServerMessage } from 'mmo-common-lib';
 import { GameScreen } from "./game/GameScreen";
 import { LoadingGameScreen } from "./game/LoadingGameScreen";
 import { PlayGameScreen } from "./game/PlayGameScreen";
@@ -58,12 +58,30 @@ export class GameCanvasDirective extends KeyboardManagerDirective implements OnI
     initWs(): WebSocket {
         this.ws = new WebSocket('ws://localhost:8080');
         this.ws.onmessage = (event) => {
+            const parsedServerMessage = JSON.parse(event.data) as WsServerMessage<WsServerMessageType, any>;
+            switch (parsedServerMessage.type) {
+                case 'welcome':
+                    {
+                        const parseWelcomeMessage = parsedServerMessage as WsWelcomeServerMessage;
+                        this.gameScreen = new PlayGameScreen(this.renderer, this.aspect);
+                        this.gameScreen.startAnimation();
+                    }
+                    break;
+                case 'player-joined':
+                    break;
+                case 'player-left':
+                    break;
+                case 'player-state-update':
+                    break;
+            }
+
+
             console.log(event.data);
         }
         this.ws.onopen = () => {
             console.log('Connected to server');
-            this.gameScreen = new PlayGameScreen(this.renderer, this.aspect);
-            this.gameScreen.startAnimation();
+            // this.gameScreen = new PlayGameScreen(this.renderer, this.aspect);
+            // this.gameScreen.startAnimation();
         };
         this.ws.onclose = () => {
             console.log('Disconnected from server');
